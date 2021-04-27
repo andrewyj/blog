@@ -18,20 +18,21 @@ const service = axios.create({
 service.interceptors.response.use(
   response => {
     const res = response.data
-    console.log(res)
     if (res.code !== 200) {
-      //TODO 错误处理
+      this.$Alert.message({
+        content: res.msg,
+        duration: 3
+      });
       return Promise.reject(new Error(res.msg || 'Error'))
     } else {
       return res
     }
   },
   error => {
-    // Message({
-    //   message: error.message,
-    //   type: 'error',
-    //   duration: 5 * 1000
-    // })
+    this.$Alert.message({
+      content: error.message,
+      duration: 3
+    });
     return Promise.reject(error)
   }
 )

@@ -13,7 +13,6 @@
           v-bind:key="item.id">{{item.name}}</router-link>
         </div>
         
-        
         <div class="post-nav cf">
           <div class="post-nav-next post-nav-item">
               <a href="/2021/03/15/go/gorm-optimistic/" rel="next" title="写了一个 gorm 乐观锁插件">
@@ -54,12 +53,17 @@ export default {
     const id = this.$route.params && this.$route.params.id
     fetchArticle(id).then(response => {
         this.article = response.data.article
-        console.log(this.article)
       }).catch(err => {
-        //TODO error
-        console.log(err)
+        this.$Alert.message({
+        content: err.message,
+        duration: 3
+      });
         return
     })
+    this.$Alert.message({
+        content: '没有更多了',
+        duration: 3
+      });
   },
   components: {
     "bl-comment": Comment,

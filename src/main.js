@@ -5,8 +5,10 @@ import store from './store'
 import AOS from 'aos'
 import "@/style/font.css";
 import "@/style/index.scss";
-
+import AlertIns from "./utils/alert";
 import Highlight from './utils/highlight';
+
+Vue.prototype.$Alert = AlertIns;
 Vue.use(Highlight);
 
 new Vue({
