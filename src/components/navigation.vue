@@ -17,12 +17,12 @@
             <div>
               <ul id="primary-menu">
 
-                <li v-bind:class="item.is_default ? openPageItem+ 'current-menu-item' : openPageItem" 
+                <li v-bind:class="{'current-menu-item': item.is_default, 'open': item.is_open}" 
                 v-for="item in menuTree"
                 v-bind:todo="item"
                 v-bind:key="item.id"
                 @click="handleClickMenu(item)">
-                  <span v-if="item.children" class="menu-dropdown" :style="'transform: rotate('+menuDropdownrotateDeg+'deg)'" @click="toggleOpenPageItem">
+                  <span v-if="item.children" class="menu-dropdown" @click="item.is_open = !item.is_open">
                     <i class="iconfont">&#xe619;</i>
                   </span>
                   <router-link :to="item.url">{{item.name}}</router-link>
@@ -34,19 +34,6 @@
                     ><router-link :to="child.url">{{child.name}}</router-link></li>
                   </ul>
                 </li>
-
-                <!-- <li :class="openPageItem">
-                  <span class="menu-dropdown" :style="'transform: rotate('+menuDropdownrotateDeg+'deg)'" @click="toggleOpenPageItem">
-                    <i class="iconfont">&#xe619;</i>
-                  </span>
-                  <a href="javascript:;">博客</a>
-                  <ul class="sub-menu">
-                    <li><a href="">分类1发送到</a></li>
-                    <li><a href="">分类1发送到</a></li>
-                    <li><a href="">分类1发送到</a></li>
-                    <li><a href="">分类1发送到</a></li>
-                  </ul>
-                </li> -->
 
               </ul>
             </div>
@@ -108,16 +95,7 @@ export default {
       } else {
         this.openStatus = "open";
       }
-    },
-    toggleOpenPageItem() {
-      if (this.openPageItem == "") {
-        this.openPageItem = "open-page-item";
-        this.menuDropdownrotateDeg = 0
-      } else {
-        this.openPageItem = "";
-        this.menuDropdownrotateDeg = 180
-      }
-    },
+    }
   },
 };
 </script>
