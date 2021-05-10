@@ -75,10 +75,15 @@ export default {
           is_default: 1,
         },
         {
-          name: "分类",
+          name: "博客",
           url: "/",
           is_default: 0,
           children: categoryMenuChildren
+        },
+        {
+          name: "归档",
+          url: "/archives",
+          is_default: 0,
         }
       ]
   },

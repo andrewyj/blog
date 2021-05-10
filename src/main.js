@@ -12,7 +12,7 @@ import loading from 'vuejs-loading-screen'
 Vue.prototype.$Alert = AlertIns;
 Vue.use(Highlight);
 Vue.use(loading, {
-  bg: 'rgba(0, 0, 0, 0.68)',
+  bg: 'rgba(255, 255, 255, 0.68)',
   icon: 'spinner',
   size: 3,
   icon_color: '#000',

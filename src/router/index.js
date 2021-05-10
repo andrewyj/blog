@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import List from '../views/List.vue'
 import Article from '../views/Article.vue'
+import Archive from '../views/Archive.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/article/:id(\\d+)',
     name: 'Article',
     component: Article
+  },
+  {
+    path: '/archives',
+    name: 'Archive',
+    component: Archive
   }
 ]
 

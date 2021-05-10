@@ -1,0 +1,72 @@
+@import "./variables.scss";
+.post-archive {
+  position: relative;
+  margin: 0 auto;
+	line-height: 1.75;
+	max-width: 800px;
+  &:before {
+    position: absolute;
+    left: -41px;
+    top: 0px;
+    bottom: 40px;
+    display: block;
+    width: 2px;
+    background: $color-light-gray;
+    content: "";
+    z-index: 0
+  }
+  &:after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: $color-light-gray;
+    position: absolute;
+    left: -47px;
+    bottom: 35px
+  }
+  .archive-items {
+    h3 {
+      padding-bottom: 10px;
+      position: relative;
+      &::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: $color-light-gray;
+        position: absolute;
+        left: -50px;
+        border: 5px solid $color-white;
+      }
+    }
+  }
+  .archive-title {
+    padding-bottom: 40px
+  }
+  .archives a {
+    position: relative;
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid $color-light-gray;
+    color: $color-light-black;
+    font-style: normal
+  }
+  .brick span {
+    color: $color-gray;
+    padding-left: 10px;
+    padding-right: 35px
+  }
+}
+@media screen and (max-width: 760px) {
+  .post-archive {
+		margin-left: 0;
+		padding-left: 0;
+    padding: 0 10px
+	}
+	.post-Archive:before,
+	.post-Archive:after,
+	#archives h3:before {
+		display: none
+	}
+}

@@ -15,3 +15,10 @@ export function fetchArticle(id, query) {
     params: query
   })
 }
+
+export function fetchArchives() {
+  return request({
+    url: '/archives',
+    method: 'get'
+  })
+}
