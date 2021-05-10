@@ -36,11 +36,9 @@
 import { fetchList } from '@/api/article'
 import { fetchCategory } from '@/api/category'
 import { fetchTag } from '@/api/tag'
+
 export default {
   name: "List",
-  created() {
-    this.init()
-  },
   data() {
     return {
       list: null,
@@ -50,7 +48,7 @@ export default {
         page: 1,
         category_id: null,
         tag_id: null,
-        keywords: undefined
+        keyword: null
       },
     }
   },
@@ -81,21 +79,26 @@ export default {
       this.getList()
     },
     init() {
-      this.listQuery.keywords = this.$route.query.keywords
-      this.listQuery.category_id = this.$route.query.categoryId
-      this.listQuery.tag_id = this.$route.query.tagId
+      this.listQuery.keyword = this.$route.query.keyword
+      this.listQuery.category_id = this.$route.query.category_id
+      this.listQuery.tag_id = this.$route.query.tag_id
+      this.listQuery.page = 1
       this.getTitle()
       this.getList()
     },
     getList() {
-      let ispeed = Math.floor(-this.scrollTop / 5)
-      document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed
-
-      this.listLoading = true
+      this.$isLoading(true)
+      let vm = this
       fetchList(this.listQuery).then(response => {
+        let ispeed = Math.floor(-this.scrollTop / 5)
+        document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed
+
+        this.$isLoading(false)
         this.list = response.data.list
         this.totalPage = response.data.total_page
         this.listQuery.page = response.data.page
+      }).catch(function() {
+        vm.$isLoading(false)
       })
     },
     getTitle() {

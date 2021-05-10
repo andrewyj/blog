@@ -1,4 +1,5 @@
 import axios from 'axios'
+import AlertIns from "./alert";
 
 // create an axios instance
 const service = axios.create({
@@ -19,7 +20,7 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (res.code !== 200) {
-      this.$Alert.message({
+      AlertIns.message({
         content: res.msg,
         duration: 3
       });
@@ -29,7 +30,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-    this.$Alert.message({
+    AlertIns.message({
       content: error.message,
       duration: 3
     });

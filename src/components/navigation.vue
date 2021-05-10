@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { fetchMenuTree } from '@/api/menu'
+import { fetchCategories } from '@/api/category'
 export default {
   name: "Navigation",
   data() {
@@ -54,19 +54,33 @@ export default {
       scrolled: "",
       openPageItem: "",
       menuDropdownrotateDeg: 180,
-      menuTree: {
-
-      }
+      menuTree: []
     };
   },
   created() {
-    fetchMenuTree().then(response => {
-        this.menuTree = response.data
-      }).catch(err => {
-        //TODO error
-        console.log(err)
-        return
+    let categoryMenuChildren = []
+    fetchCategories().then(response => {
+      for (let index in response.data) {
+        let child = response.data[index]
+        child.url = "/?category_id="+child.id
+        child.is_default = 0
+        categoryMenuChildren.push(child)
+      }
     })
+    
+    this.menuTree = [
+        {
+          name: "首页",
+          url: "/",
+          is_default: 1,
+        },
+        {
+          name: "分类",
+          url: "/",
+          is_default: 0,
+          children: categoryMenuChildren
+        }
+      ]
   },
   mounted() {
     var vm = this;

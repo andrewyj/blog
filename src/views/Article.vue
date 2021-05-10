@@ -7,7 +7,7 @@
         </div>
         <div class="center">{{article.created_at}}</div>
         <div class="tags center">
-          <router-link :to="'/?tagId='+item.id" class="tag" 
+          <router-link :to="'/?tag_id='+item.id" class="tag" 
           v-for="item in article.tags"
           v-bind:todo="item"
           v-bind:key="item.id">{{item.name}}</router-link>
@@ -15,14 +15,14 @@
         
         <div class="post-nav cf">
           <div class="post-nav-next post-nav-item">
-              <a href="/2021/03/15/go/gorm-optimistic/" rel="next" title="写了一个 gorm 乐观锁插件">
-                <i class="iconfont"></i> 写了 gorm 乐观锁插件
-              </a>
+              <router-link :to="'/article/'+next.id" class="status-btn" v-if="next.id">
+                <i class="iconfont"></i>{{next.title}}
+              </router-link>
           </div>
           <div class="post-nav-prev post-nav-item">
-              <a href="/2021/04/18/pulsar/pulsar-start/" rel="prev" title="Pulsar 入门及介绍">
-                Pulsar 入门及介绍 <i class="iconfont"></i>
-              </a>
+              <router-link :to="'/article/'+prev.id" class="status-btn" v-if="prev.id">
+                {{prev.title}}<i class="iconfont"></i>
+              </router-link>
           </div>
         </div>
       </article>
@@ -38,28 +38,45 @@ export default {
   name: "Article",
   data() {
     return {
-      tag_name: '',
-      category_name: '',
+      next: {id:0},
+      prev: {id:0},
       article: {
         title: '',
         article_detail: {
           content: ''
         },
         tags: []
-      }
+      },
+      query: {
+        category_id: null,
+        tag_id: null,
+        keyword: undefined
+      },
     };
   },
-  created() {
-    const id = this.$route.params && this.$route.params.id
-    fetchArticle(id).then(response => {
-        this.article = response.data.article
-      }).catch(err => {
-        this.$Alert.message({
-        content: err.message,
-        duration: 3
-      });
-        return
-    })
+  watch: { 
+    '$route': {
+        handler() {
+          let vm = this
+          const id = this.$route.params && this.$route.params.id
+          this.query.keyword = this.$route.query.keyword
+          this.query.category_id = this.$route.query.category_id
+          this.query.tag_id = this.$route.query.tag_id
+          this.$isLoading(true)
+          fetchArticle(id, this.query).then(response => {
+            let ispeed = Math.floor(-this.scrollTop / 5)
+            document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed
+            this.$isLoading(false)
+            this.article = response.data.article
+            this.next = response.data.next
+            this.prev = response.data.prev
+          }).catch(function() {
+            vm.$isLoading(false)
+          })
+        },
+        deep: true,
+        immediate: true,
+      } 
   },
   components: {
     "bl-comment": Comment,
