@@ -21,6 +21,7 @@
 <script>
 import { fetchList } from "@/api/article";
 import { formatTimeToStr } from "@/utils/date";
+import AOS from 'aos'
 
 export default {
   name: "Archive",
@@ -56,8 +57,8 @@ export default {
       this.$isLoading(true);
       let vm = this;
       fetchList().then((response) => {
-          let ispeed = Math.floor(-this.scrollTop / 5);
-          document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed;
+          scrollTo(0,0)
+          setInterval(function(){ AOS.refresh() }, 100);
           this.$isLoading(false);
           let vm = this
           response.data.list.forEach(function (article) {

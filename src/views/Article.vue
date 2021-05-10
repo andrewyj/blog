@@ -32,8 +32,10 @@
 </template>
 
 <script>
-import Comment from "@/components/comment";
+import Comment from "@/components/comment"
 import { fetchArticle } from '@/api/article'
+import AOS from 'aos'
+
 export default {
   name: "Article",
   data() {
@@ -64,8 +66,8 @@ export default {
           this.query.tag_id = this.$route.query.tag_id
           this.$isLoading(true)
           fetchArticle(id, this.query).then(response => {
-            let ispeed = Math.floor(-this.scrollTop / 5)
-            document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed
+            scrollTo(0,0)
+            setInterval(function(){ AOS.refresh() }, 100);
             this.$isLoading(false)
             this.article = response.data.article
             this.next = response.data.next

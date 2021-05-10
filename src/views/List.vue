@@ -37,6 +37,7 @@ import { fetchList } from '@/api/article'
 import { fetchCategory } from '@/api/category'
 import { fetchTag } from '@/api/tag'
 import { formatTimeToStr } from "@/utils/date";
+import AOS from 'aos'
 
 export default {
   name: "List",
@@ -101,9 +102,8 @@ export default {
       this.$isLoading(true)
       let vm = this
       fetchList(this.listQuery).then(response => {
-        let ispeed = Math.floor(-this.scrollTop / 5)
-        document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed
-
+        scrollTo(0,0)
+        setInterval(function(){ AOS.refresh() }, 100);
         this.$isLoading(false)
         this.list = response.data.list
         this.totalPage = response.data.total_page
