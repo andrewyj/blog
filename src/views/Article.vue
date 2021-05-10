@@ -7,7 +7,7 @@
         </div>
         <div class="center">{{article.created_at}}</div>
         <div class="tags center">
-          <router-link :to="'/article/57'" class="tag" 
+          <router-link :to="'/?tagId='+item.id" class="tag" 
           v-for="item in article.tags"
           v-bind:todo="item"
           v-bind:key="item.id">{{item.name}}</router-link>
@@ -60,15 +60,12 @@ export default {
       });
         return
     })
-    this.$Alert.message({
-        content: '没有更多了',
-        duration: 3
-      });
   },
   components: {
     "bl-comment": Comment,
   },
-  methods: {},
+  methods: {
+  },
 };
 </script>
 

@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import Navigation from "./components/navigation";
-import Search from "./components/search";
-import Introduction from "./components/introduction";
-import Footer from "./components/footer";
+import Navigation from "./components/navigation"
+import Search from "./components/search"
+import Introduction from "./components/introduction"
+import Footer from "./components/footer"
 export default {
   name: "Index",
   components: {
