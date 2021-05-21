@@ -123,6 +123,8 @@ export default {
             this.title = '#' +response.data.name
           }
         })
+      } else if (this.$route.query.keyword) {
+        this.title = '"'+this.$route.query.keyword+'"'
       } else {
         this.title = ''
       }
