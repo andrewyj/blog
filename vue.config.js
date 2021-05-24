@@ -12,6 +12,7 @@ module.exports = {
     assetsDir: 'static',
     lintOnSave: process.env.NODE_ENV === 'development',
     productionSourceMap: false,
+    runtimeCompiler: true,
     devServer: {
       port: 9527,
       open: true,

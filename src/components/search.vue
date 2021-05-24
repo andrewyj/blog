@@ -70,7 +70,6 @@ export default {
       }
       if (this.timeoutId) {
         clearTimeout(this.timeoutId);
-        this.timer = null;
       }
       this.timeoutId = setTimeout(() => {
           this.getList()

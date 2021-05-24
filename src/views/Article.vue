@@ -15,19 +15,19 @@
         
         <div class="post-nav cf">
           <div class="post-nav-next post-nav-item">
-              <router-link :to="'/article/'+next.id" class="status-btn" v-if="next.id">
+              <router-link :to="getRouteUrl(next.id)" class="status-btn" v-if="next.id">
                 <i class="iconfont"></i>{{next.title}}
               </router-link>
           </div>
           <div class="post-nav-prev post-nav-item">
-              <router-link :to="'/article/'+prev.id" class="status-btn" v-if="prev.id">
+              <router-link :to="getRouteUrl(prev.id)" class="status-btn" v-if="prev.id">
                 {{prev.title}}<i class="iconfont"></i>
               </router-link>
           </div>
         </div>
       </article>
     </div>
-    <bl-comment />
+    <bl-comment v-bind:articleId="articleId" />
   </div>
 </template>
 
@@ -40,6 +40,7 @@ export default {
   name: "Article",
   data() {
     return {
+      articleId: 0,
       next: {id:0},
       prev: {id:0},
       article: {
@@ -50,9 +51,9 @@ export default {
         tags: []
       },
       query: {
-        category_id: null,
-        tag_id: null,
-        keyword: undefined
+        category_id: '',
+        tag_id: '',
+        keyword: ''
       },
     };
   },
@@ -60,12 +61,12 @@ export default {
     '$route': {
         handler() {
           let vm = this
-          const id = this.$route.params && this.$route.params.id
+          this.articleId = this.$route.params && this.$route.params.id
           this.query.keyword = this.$route.query.keyword
           this.query.category_id = this.$route.query.category_id
           this.query.tag_id = this.$route.query.tag_id
           this.$isLoading(true)
-          fetchArticle(id, this.query).then(response => {
+          fetchArticle(this.articleId, this.query).then(response => {
             scrollTo(0,0)
             setInterval(function(){ AOS.refresh() }, 100);
             this.$isLoading(false)
@@ -84,6 +85,24 @@ export default {
     "bl-comment": Comment,
   },
   methods: {
+    getRouteUrl(articleId) {
+      let url = '/article/'+articleId
+      let query = ''
+      if (this.query.keyword) {
+        query += 'keyword='+this.query.keyword
+      }
+      if (this.query.tag_id) {
+        query += 'tag_id='+this.query.tag_id
+      }
+      if (this.query.category_id) {
+        query += 'category_id='+this.query.category_id
+      }
+      if (query) {
+        url = url+'?'+query
+      }
+      
+      return url
+    }
   },
 };
 </script>
