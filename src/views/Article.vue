@@ -5,7 +5,7 @@
         <h1 class="center post-title">{{article.title}}</h1>
         <div class="markdown-body" v-highlight v-html="article.article_detail.content">
         </div>
-        <div class="center">{{article.created_at}}</div>
+        <div class="center">{{article.created_at|formatDate}}</div>
         <div class="tags center">
           <router-link :to="'/?tag_id='+item.id" class="tag" 
           v-for="item in article.tags"
@@ -35,6 +35,7 @@
 import Comment from "@/components/comment"
 import { fetchArticle } from '@/api/article'
 import AOS from 'aos'
+import { formatTimeToStr } from "@/utils/date";
 
 export default {
   name: "Article",
@@ -56,6 +57,16 @@ export default {
         keyword: ''
       },
     };
+  },
+  filters: {
+    formatDate: function(time) {
+      if (time != null && time != "") {
+        var date = new Date(time);
+        return formatTimeToStr(date, "yyyy-MM-dd hh:mm:ss");
+      } else {
+        return "";
+      }
+    }
   },
   watch: { 
     '$route': {
