@@ -311,20 +311,20 @@
             top: 0!important;
             left: 0!important;
             float: none!important;
-            background-color: $color-gray!important;
+            background-color: $color-light-gray!important;
             display: block;
             padding: 0;
             margin: 0;
             a {
-                color: $color-white;
-                    box-sizing: border-box;
+                color: $color-light-black;
+                box-sizing: border-box;
             }
             li {
                 padding-left: 20px;
                 box-sizing: border-box;
             }
             .menu-child-selected {
-                background-color: $color-light-black;
+                background-color: $color-gray;
             }
         }
         .open {

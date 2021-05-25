@@ -26,7 +26,7 @@
           ><i class="iconfont" aria-hidden="true">&#xe616;</i></a>
       </li>
     </div>
-    <div class="cr">Copyright&copy;2018 - 2021 by huangyingju</div>
+    <div class="cr">Copyright&copy;2018 - {{getFullYear()}} by huangyingju</div>
   </footer>
 </template>
 
@@ -36,7 +36,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    getFullYear() {
+      return (new Date).getFullYear()
+    }
+  },
 };
 </script>
 <style lang="scss">
