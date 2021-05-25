@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import List from '../views/List.vue'
 import Article from '../views/Article.vue'
 import Archive from '../views/Archive.vue'
+import PublicComment from '../views/PublicComment.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/archives',
     name: 'Archive',
     component: Archive
+  },
+  {
+    path: '/comments',
+    name: 'PublicComment',
+    component: PublicComment
   }
 ]
 

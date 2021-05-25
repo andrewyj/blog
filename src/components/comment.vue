@@ -2,6 +2,7 @@
   <div class="comment-area">
     <section class="comments">
       <div class="comments-main">
+        <div class="comments-list-title"><span>{{commentCount}}</span> 条评论 </div>
         <ul class="commentwrap">
           <CommentTree 
           v-for="item in comments" 
@@ -198,6 +199,7 @@ export default {
     return {
       comments: [],
       responsePosition: 0,
+      commentCount: 0,
     };
   },
   methods: {
@@ -206,7 +208,8 @@ export default {
       vm.$isLoading(true)
       fetchComments(this.articleId).then(response => {
         vm.$isLoading(false)
-        vm.comments = response.data
+        vm.comments = response.data.comments
+        vm.commentCount = response.data.count
       }).catch(function() {
         vm.$isLoading(false)
       })

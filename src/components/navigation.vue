@@ -84,6 +84,11 @@ export default {
           id: 3,
           name: "归档",
           url: "/archives",
+        },
+        {
+          id: 4,
+          name: "留言",
+          url: "/comments",
         }
     ]
   },

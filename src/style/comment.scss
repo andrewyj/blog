@@ -26,12 +26,21 @@
         overflow: hidden;
         -webkit-transition: height 0s ease-out;
         -moz-transition: height 0s ease-out;
-        transition: height 0s ease-out
+        transition: height 0s ease-out;
+        max-width: 800px;
+        margin: 0 auto;
+        .comments-list-title {
+            max-width: 800px;
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: $color-black;
+        }
     }
 }
 
 .contents {
-	width: 100%;
+	width: 99%;
 	float: left;
     .body {
         font-size: 15px;
@@ -85,7 +94,6 @@
     width: 98%;
 	max-width: 800px;
 	margin: 0 auto;
-    margin-top: 120px;
     margin-bottom: 80px;
     textarea {
         display: block;
@@ -133,6 +141,7 @@
         margin-bottom: 5px;
         color: $color-gray;
         cursor: pointer;
+        clear: both;
     }
 }
 
