@@ -9,7 +9,7 @@
         v-bind:item="item" 
         v-bind:key="item.id">
           <div class="status-user">
-            <router-link :to="'/article/'+item.id" class="status-btn">{{item.title}}</router-link>
+            <router-link :to="getRouteUrl(item.id)" class="status-btn">{{item.title}}</router-link>
             <p class="section-p">{{item.abstract}}</p>
             <p class="post-time">{{item.created_at|formatDate}}</p>
           </div>
@@ -129,6 +129,24 @@ export default {
         this.title = ''
       }
       
+    },
+    getRouteUrl(articleId) {
+      let url = '/article/'+articleId
+      let query = ''
+      if (this.listQuery.keyword) {
+        query += 'keyword='+this.listQuery.keyword
+      }
+      if (this.listQuery.tag_id) {
+        query += 'tag_id='+this.listQuery.tag_id
+      }
+      if (this.listQuery.category_id) {
+        query += 'category_id='+this.listQuery.category_id
+      }
+      if (query) {
+        url = url+'?'+query
+      }
+      
+      return url
     }
   }
 };

@@ -82,15 +82,15 @@ export default {
         this.listQuery.page = response.data.page
       })
     },
-    resetQuery($close) {
-      if ($close) {
+    resetQuery(close) {
+      if (close) {
         this.isVisible = ''
       }
       setTimeout(()=>{
         this.list = []
         this.listQuery.keyword = ''
       }, 800)
-      this.clearTimeout(this.timeoutId)
+      clearTimeout(this.timeoutId)
     }
   },
 };

@@ -34,7 +34,7 @@ var Respond = {
         url: '',
         content: '',
       },
-      gravatar: '//cdn.v2ex.com/gravatar/s=60&d=identicon&r=G',
+      gravatar: '//cdn.v2ex.com/gravatar',
       timeoutId: '',
     }
   },
@@ -201,6 +201,14 @@ export default {
       responsePosition: 0,
       commentCount: 0,
     };
+  },
+  watch: {
+    articleId:{
+      handler (newValue) {
+        this.articleId = newValue
+        this.getComments()
+      },
+    }
   },
   methods: {
     getComments() {
