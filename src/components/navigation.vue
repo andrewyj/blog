@@ -16,25 +16,25 @@
           <div id="main-menu">
             <div>
               <ul id="primary-menu">
-
-                <li v-bind:class="{'current-menu-item': item.is_default, 'open': item.is_open}" 
-                v-for="item in menuTree"
+                <li v-bind:class="{'open': item.is_open, 'current-menu-item': selectedMenuId == item.id}" 
+                v-for="(item, index) in menuTree"
                 v-bind:todo="item"
-                v-bind:key="item.id"
-                @click="handleClickMenu(item)">
-                  <span v-if="item.children" class="menu-dropdown" @click="item.is_open = !item.is_open">
-                    <i class="iconfont">&#xe619;</i>
-                  </span>
-                  <router-link :to="item.url">{{item.name}}</router-link>
+                v-bind:key="item.id">
+                  <a @click="handleClickMenu(item)">
+                    {{item.name}}
+                    <span v-if="item.children" class="menu-dropdown" @click="dropdownMenu(index)">
+                      <i class="iconfont">&#xe619;</i>
+                    </span>
+                  </a>
                   <ul class="sub-menu" v-if="item.children">
                     <li v-for="child in item.children"
+                    v-bind:class="{'menu-child-selected': selectedMenuChildIds[item.id] && selectedMenuChildIds[item.id] == child.id}"
                     v-bind:todo="child"
-                    v-bind:key="child.id"
-                    @click="handleClickMenu(item)"
-                    ><router-link :to="child.url">{{child.name}}</router-link></li>
+                    v-bind:key="child.id">
+                      <a @click="handleClickMenu(item,child)">{{child.name}}</a>
+                    </li>
                   </ul>
                 </li>
-
               </ul>
             </div>
           </div>
@@ -54,7 +54,9 @@ export default {
       scrolled: "",
       openPageItem: "",
       menuDropdownrotateDeg: 180,
-      menuTree: []
+      menuTree: [],
+      selectedMenuId: 1,
+      selectedMenuChildIds: {},
     };
   },
   created() {
@@ -63,29 +65,27 @@ export default {
       for (let index in response.data) {
         let child = response.data[index]
         child.url = "/?category_id="+child.id
-        child.is_default = 0
         categoryMenuChildren.push(child)
       }
     })
-    
     this.menuTree = [
-        {
+      {
+          id: 1,
           name: "首页",
           url: "/",
-          is_default: 1,
         },
         {
+          id: 2,
           name: "博客",
-          url: "/",
-          is_default: 0,
-          children: categoryMenuChildren
+          url: "",
+          children: categoryMenuChildren,
         },
         {
+          id: 3,
           name: "归档",
           url: "/archives",
-          is_default: 0,
         }
-      ]
+    ]
   },
   mounted() {
     var vm = this;
@@ -102,17 +102,29 @@ export default {
     });
   },
   methods: {
-    handleClickMenu(currentItem) {
-      for(let index in this.menuTree) {
-        this.menuTree[index].is_default = false
+    dropdownMenu(menuIndex) {
+      let menu = this.menuTree[menuIndex]
+      menu.is_open = !menu.is_open
+      this.$set(this.menuTree, menuIndex, menu)
+      this.selectedMenuId = menu.id
+    },
+    handleClickMenu(menu, child) {
+      this.selectedMenuId = menu.id
+      let url = menu.url
+      if (child) {
+        url = child.url
+        this.selectedMenuChildIds[menu.id] = child.id
       }
-      currentItem.is_default = true
+      if (url) {
+        this.openStatus = "open"
+        this.$router.push(url).catch(()=>{})
+      }
     },
     toggleOpenStatus() {
       if (this.openStatus === "open") {
-        this.openStatus = "close";
+        this.openStatus = "close"
       } else {
-        this.openStatus = "open";
+        this.openStatus = "open"
       }
     }
   },

@@ -143,6 +143,9 @@
                     }
                 }
             }
+            .menu-child-selected {
+                background-color: $color-light-gray;
+            }
             a {
                 float: none;
                 padding: 15px 25px 15px 20px;
@@ -319,6 +322,9 @@
             li {
                 padding-left: 20px;
                 box-sizing: border-box;
+            }
+            .menu-child-selected {
+                background-color: $color-light-black;
             }
         }
         .open {
