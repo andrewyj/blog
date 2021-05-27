@@ -24,6 +24,8 @@ import { fetchComments,createCategory } from '@/api/comment'
 import md5 from 'js-md5';
 import { formatTimeToStr } from "@/utils/date";
 import { validURL, validEmail } from '@/utils/validate'
+import AOS from 'aos'
+
 var Respond = {
   name: 'Respond',
   data() {
@@ -158,7 +160,7 @@ var CommentTree = {
     }
   },
   template: 
-      '<li class="contents">'+
+      '<li class="contents" data-aos="fade-up">'+
         '<div>'+
           '<div class="profile">'+
             '<a v-bind:href="comment.url ? comment.url : '+"'javascript:void(0)'"+'"><img v-bind:src="getGravatar(comment.email)"/></a>'+
@@ -207,6 +209,7 @@ export default {
       handler (newValue) {
         this.articleId = newValue
         this.getComments()
+        AOS.refresh()
       },
     }
   },

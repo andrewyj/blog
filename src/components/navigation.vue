@@ -18,7 +18,6 @@
               <ul id="primary-menu">
                 <li v-bind:class="{'open': item.is_open, 'current-menu-item': selectedMenuId == item.id}" 
                 v-for="(item, index) in menuTree"
-                v-bind:todo="item"
                 v-bind:key="item.id">
                   <a @click="handleClickMenu(item)">
                     {{item.name}}
@@ -29,7 +28,6 @@
                   <ul class="sub-menu" v-if="item.children">
                     <li v-for="child in item.children"
                     v-bind:class="{'menu-child-selected': selectedMenuChildIds[item.id] && selectedMenuChildIds[item.id] == child.id}"
-                    v-bind:todo="child"
                     v-bind:key="child.id">
                       <a @click="handleClickMenu(item,child)">{{child.name}}</a>
                     </li>
@@ -76,17 +74,22 @@ export default {
         },
         {
           id: 2,
-          name: "博客",
+          name: "分类",
           url: "",
           children: categoryMenuChildren,
         },
         {
           id: 3,
+          name: "标签",
+          url: "/tags",
+        },
+        {
+          id: 4,
           name: "归档",
           url: "/archives",
         },
         {
-          id: 4,
+          id: 5,
           name: "留言",
           url: "/comments",
         }

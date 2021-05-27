@@ -4,6 +4,7 @@ import List from '../views/List.vue'
 import Article from '../views/Article.vue'
 import Archive from '../views/Archive.vue'
 import PublicComment from '../views/PublicComment.vue'
+import Tag from '../views/Tag.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/comments',
     name: 'PublicComment',
     component: PublicComment
+  },
+  {
+    path: '/tags',
+    name: 'Tag',
+    component: Tag
   }
 ]
 

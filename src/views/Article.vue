@@ -3,7 +3,7 @@
     <div class="container">
       <article class="post">
         <h1 class="center post-title">{{article.title}}</h1>
-        <div class="markdown-body" v-highlight v-html="article.article_detail.content">
+        <div class="markdown-body" v-highlight v-html="article.content">
         </div>
         <div class="center">{{article.created_at|formatDate}}</div>
         <div class="tags center">
@@ -27,7 +27,7 @@
         </div>
       </article>
     </div>
-    <bl-comment v-bind:articleId="articleId" />
+    <Comment v-bind:articleId="articleId" />
   </div>
 </template>
 
@@ -44,13 +44,7 @@ export default {
       articleId: 0,
       next: {id:0},
       prev: {id:0},
-      article: {
-        title: '',
-        article_detail: {
-          content: ''
-        },
-        tags: []
-      },
+      article: {},
       query: {
         category_id: '',
         tag_id: '',
@@ -93,7 +87,7 @@ export default {
       } 
   },
   components: {
-    "bl-comment": Comment,
+    Comment
   },
   methods: {
     getRouteUrl(articleId) {
