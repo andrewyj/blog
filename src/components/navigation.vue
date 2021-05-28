@@ -68,31 +68,36 @@ export default {
     })
     this.menuTree = [
       {
-          id: 1,
-          name: "首页",
-          url: "/",
-        },
-        {
-          id: 2,
-          name: "分类",
-          url: "",
-          children: categoryMenuChildren,
-        },
-        {
-          id: 3,
-          name: "标签",
-          url: "/tags",
-        },
-        {
-          id: 4,
-          name: "归档",
-          url: "/archives",
-        },
-        {
-          id: 5,
-          name: "留言",
-          url: "/comments",
-        }
+        id: 1,
+        name: "首页",
+        url: "/",
+      },
+      {
+        id: 2,
+        name: "分类",
+        url: "",
+        children: categoryMenuChildren,
+      },
+      {
+        id: 3,
+        name: "标签",
+        url: "/tags",
+      },
+      {
+        id: 4,
+        name: "图片墙",
+        url: "/photos",
+      },
+      {
+        id: 5,
+        name: "归档",
+        url: "/archives",
+      },
+      {
+        id: 6,
+        name: "留言",
+        url: "/comments",
+      }
     ]
   },
   mounted() {

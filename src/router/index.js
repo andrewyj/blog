@@ -5,6 +5,7 @@ import Article from '../views/Article.vue'
 import Archive from '../views/Archive.vue'
 import PublicComment from '../views/PublicComment.vue'
 import Tag from '../views/Tag.vue'
+import Photo from '../views/Photo.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/tags',
     name: 'Tag',
     component: Tag
+  },
+  {
+    path: '/photos',
+    name: 'Photo',
+    component: Photo
   }
 ]
 

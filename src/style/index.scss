@@ -105,6 +105,38 @@ h1.post-title {
     font-family: "Georgia","Xin Gothic","PingFang SC","Hiragino Sans GB","Droid Sans Fallback","Microsoft YaHei",sans-serif;
 }
 
+.posts-list {
+    margin: 0;
+    padding: 0;
+    h2 {
+        font-size: 1.125rem;
+        line-height: 24px;
+        font-weight: normal;
+        margin-bottom: 4px
+    }
+    a {
+        color: inherit;
+        &:hover{
+            color: $color-gray;
+        }
+    }    
+    &>li {
+        list-style: none;
+        position: relative
+    }
+    .post {
+        position: relative;
+        max-width: 800px;
+        margin: auto;
+        .status-list-item {
+            position: relative;
+            width: 100%;
+            border-radius: 6px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.14);
+        }
+    }
+}
+
 @media screen and (max-width:760px) {
 	.container {
 		padding: 20px 10px
