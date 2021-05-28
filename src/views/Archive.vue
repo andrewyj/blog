@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1 class="post-title">归档</h1>
-
       <div class="post-archive">
         <div class="archive-items">
           <div class="archive-title" v-for="(items, index) in archives" v-bind:item="items" v-bind:key="index">
@@ -14,14 +13,14 @@
           </div>
         </div>
       </div>
-
+    <loadMore :isLoading="isLoading" :totalPage="totalPage" @nextPage="nextPage"/>
   </div>
 </template>
 
 <script>
 import { fetchList } from "@/api/article";
+import loadMore from "@/components/loadMore"
 import { formatTimeToStr } from "@/utils/date";
-import AOS from 'aos'
 
 export default {
   name: "Archive",
@@ -29,9 +28,15 @@ export default {
     return {
       archives: {},
       totalPage: 0,
-      page: 1,
+      isLoading: false,
+      query: {
+        page:1
+      },
       pageSize: 20,
     };
+  },
+  components: {
+    loadMore
   },
   filters: {
     formatDate: function(time) {
@@ -54,13 +59,11 @@ export default {
   },
   methods: {
     getArchives() {
-      this.$isLoading(true);
+      this.isLoading = true;
       let vm = this;
-      fetchList().then((response) => {
-          scrollTo(0,0)
-          setInterval(function(){ AOS.refresh() }, 100);
-          this.$isLoading(false);
-          let vm = this
+      fetchList(this.query).then((response) => {
+          this.isLoading = false;
+          this.totalPage = response.data.total_page
           response.data.list.forEach(function (article) {
             var date = new Date(article.created_at);
             let year = formatTimeToStr(date, "yyyy-MM")
@@ -72,9 +75,16 @@ export default {
           this.$forceUpdate();
         })
         .catch(function () {
-          vm.$isLoading(false);
+          if (this.query.page > 1) {
+            --this.query.page
+          }
+          vm.isLoading = false
         });
     },
+    nextPage(page) {
+      this.query.page = page
+      this.getArchives()
+    }
   },
 };
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div class="pagination">
-   <a href="javascript:;" v-if="this.page < this.totalPage">
+   <p href="javascript:;" v-if="this.page < this.totalPage">
     <i v-if="!isLoading" @click="nextPage()" class="iconfont">&#xe605;</i>
     <img v-if="isLoading" style="width: 50px" src="../image/loading.gif">
-   </a>
+   </p>
   </div>
 </template>
 
@@ -24,7 +24,6 @@ export default {
       if (this.page >= this.totalPage) {
         return
       }
-      console.log(this.page)
       ++this.page
       this.$emit("nextPage", this.page)
     },
@@ -41,7 +40,8 @@ export default {
 }
 
 .pagination i {
-	font-size: 40px
+	font-size: 40px;
+  cursor: pointer;
 }
 </style>
 

@@ -145,6 +145,9 @@ export default {
           })
         })
       }).catch(function() {
+        if (this.query.page > 1) {
+            --this.query.page
+          }
         vm.isLoading = false
       })
     }
