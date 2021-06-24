@@ -1,10 +1,14 @@
 <template>
   <div class="container">
       <h1 class="post-title">标签</h1>
-      <div class="tags">
-        <router-link :style="getTagStyle(item.count)" :to="'/?tag_id='+item.id" class="tag" 
-        v-for="item in tags" 
-        v-bind:key="item.id">{{item.name}}</router-link>
+      <div class="posts-list">
+        <div class="post">
+          <div class="tags">
+            <router-link :style="getTagStyle(item.count)" :to="'/?tag_id='+item.id" class="tag" 
+            v-for="item in tags" 
+            v-bind:key="item.id">{{item.name}}</router-link>
+          </div>
+        </div>
       </div>
   </div>
 </template>
@@ -38,24 +42,10 @@ export default {
 
       return {
         'color': 'rgb('+rgb+','+rgb+','+rgb+''+')',
-        'font-size': fontSize+'px'
+        'font-size': fontSize+'px',
+        'margin': '5px'
       }
     }
   }
 }
 </script>
-<style scoped>
-.tags {
-  position: relative;
-  margin: 0 auto 0;
-  max-width: 800px;
-  margin: auto;
-}
-.tag {
-  display: inline-block;
-  margin: 10px;
-  text-decoration: none;
-  word-wrap: break-word;
-}
-
-</style>
