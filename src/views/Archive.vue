@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <h1 class="post-title">归档</h1>
-      <div class="post-archive">
-        <div class="archive-items">
-          <div class="archive-title" v-for="(items, index) in archives" v-bind:item="items" v-bind:key="index">
-            <h3>{{index}}</h3>
-            <div class="archives " v-for="item in items" v-bind:item="item" v-bind:key="item.id">
-              <div class="brick">
-                <router-link :to="'/article/'+item.id"><span class="time">{{item.created_at|formatDate}}</span>{{item.title}}</router-link>
-              </div>
+    <div class="post-archive">
+      <div class="archive-items">
+        <div class="archive-title" v-for="(items, index) in archives" v-bind:item="items" v-bind:key="index">
+          <h3>{{index}}</h3>
+          <div class="archives " v-for="item in items" v-bind:item="item" v-bind:key="item.id">
+            <div class="brick">
+              <router-link :to="'/article/'+item.id"><span class="time">{{item.created_at|formatDate}}</span>{{item.title}}</router-link>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <loadMore :isLoading="isLoading" :totalPage="totalPage" @nextPage="nextPage"/>
   </div>
 </template>

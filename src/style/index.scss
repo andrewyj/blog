@@ -25,6 +25,30 @@ body {
 	-moz-font-feature-settings: "liga" on
 }
 
+.tags {
+    display: block;
+    width: inherit;
+    margin:20px 0;
+    .tag {
+        display: inline-block;
+        margin: auto 5px;
+        background: none;
+        border: 1px dotted $color-black;
+        padding: 0px 10px;
+        color: $color-black;
+        text-decoration: none;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover {
+            color: $color-gray;
+        }
+    }
+}
+
+.center {
+    text-align: center;
+}
+
 body,
 h1,
 h2,
@@ -123,17 +147,6 @@ h1.post-title {
     &>li {
         list-style: none;
         position: relative
-    }
-    .post {
-        position: relative;
-        max-width: 800px;
-        margin: auto;
-        .status-list-item {
-            position: relative;
-            width: 100%;
-            border-radius: 6px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.14);
-        }
     }
 }
 

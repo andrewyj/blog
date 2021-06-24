@@ -89,7 +89,8 @@ export default {
       isLoading: false,
       items: [],
       query: {
-        page: 1
+        page: 1,
+        tag_id: '',
       },
       totalPage: 0,
       photosElem: null,
@@ -101,7 +102,19 @@ export default {
       itemSelector: '.photo-item',
         // columnWidth: 200
     })
-    this.getPhotos()
+    // this.getPhotos()
+  },
+  watch: { 
+    '$route': {
+        handler() {
+          let vm = this
+          this.query.tag_id = this.$route.query.tag_id
+          this.items = []
+          vm.getPhotos()
+        },
+        deep: true,
+        immediate: true,
+      } 
   },
   methods: {
     enterGallery(index) {
@@ -130,11 +143,22 @@ export default {
           for(let index in response.data.list) {
             let photo = response.data.list[index]
             this.totalPage = response.data.total_page
+            let title = '<h2>'+photo.title+'</h2>'+'<p>'+photo.describe+'</p><br/>'
+            if (photo.tags) {
+              let script = "document.getElementsByClassName(\"pswp__button--close\")[0].click();"
+              title += '<div class="tags center">'
+              for(let index in photo.tags) {
+                let tag = photo.tags[index]
+                let tagScript = script + "setTimeout(function(){location.href=\"/#/photos?tag_id="+tag.id+"\"},100)"
+                title += "<a style='border-color: #666;color: #666' class='tag' onclick='"+tagScript+"'>"+tag.name+"</a>"
+              }
+              title += '</div>'
+            }
             this.items.push({
               src: photo.link,
               w: photo.width,
               h: photo.height,
-              title: photo.title,
+              title: title,
             })
           }
           vm.$nextTick(function () {
@@ -171,6 +195,10 @@ export default {
     padding-left: 10px;
     padding-right: 10px
   }
+  .tags .tag {
+      border: 1px dotted #999;
+      color: #999;
+  } 
   img {
       max-width: 100%;
       height: auto;
@@ -185,5 +213,8 @@ export default {
     .photo-item {
       width: 50%
     }
+  }
+  .pswp__caption__center {
+    text-align: center;
   }
 </style>
