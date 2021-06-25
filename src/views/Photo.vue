@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="post-title" v-if="title">{{title}}</h1>
+    <h1 class="post-title">{{title}}</h1>
     <div class="posts-list">
       <div class="post">
         <div class="photos">
@@ -134,7 +134,7 @@ export default {
       this.getPhotos()
     },
     init() {
-      this.title = ''
+      this.title = '图片墙'
       if (this.query.tag_id != this.$route.query.tag_id && this.$route.query.tag_id) {
         fetchPhotoTag(this.$route.query.tag_id).then(response => {
           if (response.data) {

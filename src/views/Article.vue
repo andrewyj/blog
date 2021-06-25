@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="container">
+      <h1 class="post-title">归档</h1>
       <article class="post">
         <h1 class="center post-title">{{article.title}}</h1>
         <div class="markdown-body" v-highlight v-html="article.content">

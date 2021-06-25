@@ -1,14 +1,15 @@
 <template>
   <div class="container">
-      <div class="posts-list">
-        <div class="post">
-          <div class="tags">
-            <router-link :style="getTagStyle(item.count)" :to="'/?tag_id='+item.id" class="tag" 
-            v-for="item in tags" 
-            v-bind:key="item.id">{{item.name}}</router-link>
-          </div>
+    <h1 class="post-title">标签</h1>
+    <div class="posts-list">
+      <div class="post">
+        <div class="tags">
+          <router-link :style="getTagStyle(item.count)" :to="'/?tag_id='+item.id" class="tag" 
+          v-for="item in tags" 
+          v-bind:key="item.id">{{item.name}}</router-link>
         </div>
       </div>
+    </div>
   </div>
 </template>
 

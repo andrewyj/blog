@@ -17,7 +17,7 @@
       </li>
       <li data-aos="fade-up">
         <a
-          title="QQ"
+          title="github"
           class="socialicon"
           href="https://github.com/SuperHYJ"
           target="_blank"

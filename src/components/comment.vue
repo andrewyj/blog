@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { fetchComments,createCategory } from '@/api/comment'
+import { fetchComments,createComment } from '@/api/comment'
 import md5 from 'js-md5';
 import { formatTimeToStr } from "@/utils/date";
 import { validURL, validEmail } from '@/utils/validate'
@@ -209,7 +209,6 @@ export default {
       handler (newValue) {
         this.articleId = newValue
         this.getComments()
-        AOS.refresh()
       },
     }
   },
@@ -221,6 +220,7 @@ export default {
         vm.$isLoading(false)
         vm.comments = response.data.comments
         vm.commentCount = response.data.count
+        setInterval(function(){ AOS.refresh() }, 100);
       }).catch(function() {
         vm.$isLoading(false)
       })
@@ -233,7 +233,7 @@ export default {
       respond.article_id = parseInt(this.articleId)
       let vm = this
       vm.$isLoading(true)
-      createCategory(respond).then(() => {
+      createComment(respond).then(() => {
         this.getComments()
       }).catch(function() {
         vm.$isLoading(false)

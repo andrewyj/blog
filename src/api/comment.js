@@ -10,7 +10,7 @@ export function fetchComments(articleId) {
     method: 'get',
   })
 }
-export function createCategory(data) {
+export function createComment(data) {
   return request({
     url: '/comment',
     method: 'post',
