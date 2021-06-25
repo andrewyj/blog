@@ -6,14 +6,14 @@
             <input
               type="text"
               autocomplete="off"
-              :placeholder="title"
+              :placeholder="getTitle()"
               name="keyword"
               v-model="listQuery.keyword"
               v-on:keyup="onSearch"
             />
             <ul class="search-filtered" v-if="list">
               <li v-for="item in list" v-bind:item="item" v-bind:key="item.id" v-on:click="resetQuery(true)">
-                <router-link :to="'/article/'+item.id+'?keyword='+listQuery.keyword">{{item.title}}</router-link>
+                <router-link :to="getRoute(item.id)">{{item.title}}</router-link>
               </li>
             </ul>
           </div>
@@ -29,6 +29,8 @@
 
 <script>
 import { fetchList } from '@/api/article'
+import { fetchPhotos } from '@/api/photo'
+
 export default {
   name: "Search",
   data() {
@@ -41,16 +43,15 @@ export default {
       list: [],
       total_page: 0,
       timeoutId:null,
-      title: ""
+      searchArticle: true
     };
   },
   watch: { 
     '$route': {
         handler() {
-          if (this.$route.path == 'photo') {
-            this.title = "图片、标题、分类、描述..."
-          } else {
-            this.title = "文章、标题、分类、描述..."
+          this.searchArticle = true
+          if (this.$route.path == '/photos') {
+            this.searchArticle = false
           }
         },
         deep: true,
@@ -60,12 +61,12 @@ export default {
   methods: {
     onSearch($e) {
       if (!this.listQuery.keyword) {
-        this.resetQuery()
+        this.list = []
         return
       }
       if ($e.keyCode == 13) {
         this.resetQuery(true)
-        this.$router.push('/?keyword='+this.listQuery.keyword)
+        this.$router.push(this.route+'?keyword='+this.listQuery.keyword)
         return
       }
       if (this.timeoutId) {
@@ -76,11 +77,19 @@ export default {
       }, 800);
     },
     getList() {
-      fetchList(this.listQuery).then(response => {
-        this.list = response.data.list
-        this.totalPage = response.data.total_page
-        this.listQuery.page = response.data.page
-      })
+      if (this.searchArticle) {
+        fetchList(this.listQuery).then(response => {
+          this.list = response.data.list
+          this.totalPage = response.data.total_page
+          this.listQuery.page = response.data.page
+        })
+      } else {
+        fetchPhotos(this.listQuery).then(response => {
+          this.list = response.data.list
+          this.totalPage = response.data.total_page
+          this.listQuery.page = response.data.page
+        })
+      }
     },
     resetQuery(close) {
       if (close) {
@@ -91,6 +100,17 @@ export default {
         this.listQuery.keyword = ''
       }, 800)
       clearTimeout(this.timeoutId)
+    },
+    getTitle() {
+      return this.searchArticle ? '文章、标题、分类、描述...' : '图片、标题、标签、描述...'
+    },
+    getRoute(id) {
+      id = id ? '/'+id : ''
+      let path = this.searchArticle ? '/article'+id : '/photos'+id
+      if (this.listQuery.keyword) {
+        path += '?keyword='+this.listQuery.keyword
+      }
+      return path
     }
   },
 };

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { fetchTags } from '@/api/tag'
+import { fetchArticleTags } from '@/api/tag'
 export default {
   name: "Tag",
   data() {
@@ -25,7 +25,7 @@ export default {
   created() {
     this.$isLoading(true)
     let vm = this
-    fetchTags().then(response => {
+    fetchArticleTags().then(response => {
       this.$isLoading(false)
       this.tags = response.data
     }).catch(function() {

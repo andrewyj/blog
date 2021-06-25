@@ -35,7 +35,7 @@
 <script>
 import { fetchList } from '@/api/article'
 import { fetchCategory } from '@/api/category'
-import { fetchTag } from '@/api/tag'
+import { fetchArticleTag } from '@/api/tag'
 import { formatTimeToStr } from "@/utils/date";
 import AOS from 'aos'
 
@@ -118,7 +118,7 @@ export default {
           this.title = response.data.name
         })
       } else if (this.listQuery.tag_id) {
-        fetchTag(this.listQuery.tag_id).then(response => {
+        fetchArticleTag(this.listQuery.tag_id).then(response => {
           if (response.data) {
             this.title = '#' +response.data.name
           }

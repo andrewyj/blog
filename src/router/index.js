@@ -36,7 +36,7 @@ const routes = [
     component: Tag
   },
   {
-    path: '/photos',
+    path: '/photos/:id?',
     name: 'Photo',
     component: Photo
   }

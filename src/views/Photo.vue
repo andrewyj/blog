@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h1 class="post-title">图片墙</h1>
+    <h1 class="post-title" v-if="title">{{title}}</h1>
     <div class="posts-list">
       <div class="post">
         <div class="photos">
-          <div class="photo-item" v-for="(item, index) in items" v-bind:key="index" :ref="'photoItem-'+index">
+          <div class="photo-item" v-for="(item, index) in items" v-bind:key="index">
             <img @click="enterGallery(index)" :src="item.src+'?x-oss-process=image/resize,w_200'"/>
           </div>
         </div>
@@ -71,6 +71,7 @@ import "photoswipe/dist/photoswipe.css";
 import "photoswipe/dist/default-skin/default-skin.css";
 import loadMore from "@/components/loadMore"
 import { fetchPhotos } from '@/api/photo'
+import { fetchPhotoTag } from '@/api/tag'
 
 function doubleRaf (callback) {
   requestAnimationFrame(() => {
@@ -88,9 +89,11 @@ export default {
       masonry: null,
       isLoading: false,
       items: [],
+      title: '',
       query: {
         page: 1,
         tag_id: '',
+        keyword: '',
       },
       totalPage: 0,
       photosElem: null,
@@ -102,15 +105,11 @@ export default {
       itemSelector: '.photo-item',
         // columnWidth: 200
     })
-    // this.getPhotos()
   },
   watch: { 
     '$route': {
         handler() {
-          let vm = this
-          this.query.tag_id = this.$route.query.tag_id
-          this.items = []
-          vm.getPhotos()
+          this.init()
         },
         deep: true,
         immediate: true,
@@ -126,7 +125,7 @@ export default {
         this.items,
         options
       )
-      gallery.init();
+      gallery.init()
       gallery.goTo(index)
       gallery.ui.getFullscreenAPI().enter()
     },
@@ -134,32 +133,39 @@ export default {
       this.query.page = page
       this.getPhotos()
     },
-    getPhotos() {
+    init() {
+      this.title = ''
+      if (this.query.tag_id != this.$route.query.tag_id && this.$route.query.tag_id) {
+        fetchPhotoTag(this.$route.query.tag_id).then(response => {
+          if (response.data) {
+            this.title = '#' +response.data.name
+          }
+        })
+      } else if (this.$route.query.keyword) {
+        this.title = '"'+this.$route.query.keyword+'"'
+      }
+      this.query.tag_id = this.$route.query.tag_id
+      this.query.keyword = this.$route.query.keyword
+      this.items = []
+      this.getPhotos(this.$route.params && this.$route.params.id)
+    },
+    getPhotos(id) {
       this.isLoading = true
       let vm = this
+      let goto = null
       fetchPhotos(this.query).then(response => {
         this.isLoading = false
         doubleRaf(()=> {
           for(let index in response.data.list) {
             let photo = response.data.list[index]
             this.totalPage = response.data.total_page
-            let title = '<h2>'+photo.title+'</h2>'+'<p>'+photo.describe+'</p><br/>'
-            if (photo.tags) {
-              let script = "document.getElementsByClassName(\"pswp__button--close\")[0].click();"
-              title += '<div class="tags center">'
-              for(let index in photo.tags) {
-                let tag = photo.tags[index]
-                let tagScript = script + "setTimeout(function(){location.href=\"/#/photos?tag_id="+tag.id+"\"},100)"
-                title += "<a style='border-color: #666;color: #666' class='tag' onclick='"+tagScript+"'>"+tag.name+"</a>"
-              }
-              title += '</div>'
+            this.items.push(this.tidyPhoto(photo))
+            if (id && photo.id == id) {
+              goto = this.items.length - 1
             }
-            this.items.push({
-              src: photo.link,
-              w: photo.width,
-              h: photo.height,
-              title: title,
-            })
+          }
+          if (goto != null) {
+            this.enterGallery(goto)
           }
           vm.$nextTick(function () {
             imagesLoaded(this.photosElem).on('progress', ()=>{
@@ -174,6 +180,26 @@ export default {
           }
         vm.isLoading = false
       })
+    },
+    tidyPhoto(photo) {
+      let title = '<h2>'+photo.title+'</h2>'+'<p>'+photo.describe+'</p><br/>'
+      if (photo.tags) {
+        let script = "document.getElementsByClassName(\"pswp__button--close\")[0].click();"
+        title += '<div class="tags center">'
+        for(let index in photo.tags) {
+          let tag = photo.tags[index]
+          let tagScript = script + "setTimeout(function(){location.href=\"/#/photos?tag_id="+tag.id+"\"},100)"
+          title += "<a style='border-color: #666;color: #666' class='tag' onclick='"+tagScript+"'>"+tag.name+"</a>"
+        }
+        title += '</div>'
+      }
+
+      return {
+        src: photo.link,
+        w: photo.width,
+        h: photo.height,
+        title: title,
+      }
     }
   }
 };
