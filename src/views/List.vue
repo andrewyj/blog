@@ -17,7 +17,7 @@
       </div>
 
       <div class="pagination">
-        <span class="extend prev" v-if="listQuery.page > 1" @click="prevPage()">《</span>
+        <span class="extend prev" v-if="listQuery.page > 1" @click="prevPage()"><i class="iconfont">&#xe6a0;</i></span>
         <span class="page-number" v-if="listQuery.page > 1" @click="firstPage()">1</span>
         <span class="space" v-if="listQuery.page > 3">…</span>
         <span class="page-number" v-if="listQuery.page-1 > 1" @click="prevPage()">{{listQuery.page-1}}</span>
@@ -25,7 +25,7 @@
         <span class="page-number" v-if="listQuery.page+1 < totalPage" @click="nextPage()">{{listQuery.page+1}}</span>
         <span class="space" v-if="totalPage - listQuery.page > 2">…</span>
         <span class="page-number" v-if="listQuery.page < totalPage" @click="lastPage()">{{totalPage}}</span>
-        <span class="extend next" v-if="listQuery.page < totalPage" @click="nextPage()">》</span>
+        <span class="extend next" v-if="listQuery.page < totalPage" @click="nextPage()"><i class="iconfont">&#xe69f;</i></span>
       </div>
 
     </div>

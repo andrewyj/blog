@@ -280,12 +280,12 @@
             transition: right .4s ease 0s;
             .open {
                 .menu-dropdown {
-                    transform: rotate(0deg);
+                    transform: rotate(-180deg);
                     transition: transform .3s ease-in, top .2s ease-in;
                 }
             };
             .menu-dropdown {
-                transform: rotate(-180deg);
+                transform: rotate(0deg);
                 display: block;
                 transition: transform .3s ease-out, top .2s ease-out;
             }

@@ -22,7 +22,7 @@
                   <a @click="handleClickMenu(item)">
                     {{item.name}}
                     <span v-if="item.children" class="menu-dropdown" @click="dropdownMenu(index)">
-                      <i class="iconfont">&#xe619;</i>
+                      <i class="iconfont">&#xe665;</i>
                     </span>
                   </a>
                   <ul class="sub-menu" v-if="item.children">

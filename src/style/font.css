@@ -1,12 +1,14 @@
-@font-face {
-    font-family: hermiticon;
-    src: url(fonts/hermiticon.eot?cez6o0);
-    src: url(fonts/hermiticon.eot?#iefixcez6o0) format('embedded-opentype'), url(fonts/hermiticon.ttf?cez6o0) format('truetype'), url(fonts/hermiticon.woff?cez6o0) format('woff'), url(fonts/hermiticon.svg?cez6o0#hermiticon) format('svg');
-    font-weight: 400;
-    font-style: normal
-}
-@font-face {
+/* @font-face {
     font-family: 'iconfont';
     src: url(fonts/iconfont.eot);
-    src: url(fonts/iconfont.eot?#iefix) format('embedded-opentype'), url(fonts/iconfont.woff) format('woff'), url(fonts/iconfont.ttf) format('truetype'), url(fonts/iconfont.svg#iconfont) format('svg')
+    src: url(fonts/iconfont.eot?#iefix) format('embedded-opentype'), 
+    url(fonts/iconfont.woff) format('woff'), 
+    url(fonts/iconfont.ttf) format('truetype'), 
+    url(fonts/iconfont.svg#iconfont) format('svg')
+} */
+@font-face {
+    font-family: "iconfont";
+    src: url('fonts/iconfont.woff2?t=1624588523430') format('woff2'),
+        url('fonts/iconfont.woff?t=1624588523430') format('woff'),
+        url('fonts/iconfont.ttf?t=1624588523430') format('truetype');
 }

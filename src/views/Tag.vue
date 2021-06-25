@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-      <h1 class="post-title">标签</h1>
       <div class="posts-list">
         <div class="post">
           <div class="tags">

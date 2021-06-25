@@ -22,7 +22,7 @@
     </div>
 
     <div class="hebin" data-aos="fade-down">
-      <i class="js-toggle-search iconfont" v-on:click="isVisible = 'is-visible'" data-aos="fade-down">&#xe60e;</i>
+      <i class="js-toggle-search iconfont" v-on:click="isVisible = 'is-visible'" data-aos="fade-down">&#xe659;</i>
     </div>
   </div>
 </template>
