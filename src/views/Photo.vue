@@ -195,7 +195,7 @@ export default {
       }
 
       return {
-        src: photo.link,
+        src: photo.path,
         w: photo.width,
         h: photo.height,
         title: title,

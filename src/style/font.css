@@ -1,14 +1,52 @@
-/* @font-face {
-    font-family: 'iconfont';
-    src: url(fonts/iconfont.eot);
-    src: url(fonts/iconfont.eot?#iefix) format('embedded-opentype'), 
-    url(fonts/iconfont.woff) format('woff'), 
-    url(fonts/iconfont.ttf) format('truetype'), 
-    url(fonts/iconfont.svg#iconfont) format('svg')
-} */
 @font-face {
-    font-family: "iconfont";
-    src: url('fonts/iconfont.woff2?t=1624588523430') format('woff2'),
-        url('fonts/iconfont.woff?t=1624588523430') format('woff'),
-        url('fonts/iconfont.ttf?t=1624588523430') format('truetype');
-}
+    font-family: "iconfont"; /* Project id 2444584 */
+    src: url('./fonts/iconfont.woff2?t=1624936362692') format('woff2'),
+         url('./fonts/iconfont.woff?t=1624936362692') format('woff'),
+         url('./fonts/iconfont.ttf?t=1624936362692') format('truetype');
+  }
+  
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-sousuo1:before {
+    content: "\e659";
+  }
+  
+  .icon-More:before {
+    content: "\e634";
+  }
+  
+  .icon-shang:before {
+    content: "\e665";
+  }
+  
+  .icon-weibo:before {
+    content: "\e62f";
+  }
+  
+  .icon-githubb:before {
+    content: "\e63b";
+  }
+  
+  .icon-jiazai:before {
+    content: "\e684";
+  }
+  
+  .icon-weixin:before {
+    content: "\e62e";
+  }
+  
+  .icon-xiayiye-xianxing3-0:before {
+    content: "\e69f";
+  }
+  
+  .icon-shangyiye-xianxing3-0:before {
+    content: "\e6a0";
+  }
+  
+  
