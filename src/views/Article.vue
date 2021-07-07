@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="container">
-      <h1 class="post-title">归档</h1>
+      <h1 class="post-title">{{article.title}}</h1>
       <article class="post">
-        <h1 class="center post-title">{{article.title}}</h1>
         <div class="markdown-body" v-highlight v-html="article.content">
         </div>
         <div class="center">{{article.created_at|formatDate}}</div>
@@ -15,14 +14,14 @@
         </div>
         
         <div class="post-nav cf">
-          <div class="post-nav-next post-nav-item">
-            <router-link :to="getRouteUrl(next.id)" class="status-btn" v-if="next.id">
-              <i class="iconfont">&#xe6a0;</i>{{next.title}}
-            </router-link>
-          </div>
           <div class="post-nav-prev post-nav-item">
             <router-link :to="getRouteUrl(prev.id)" class="status-btn" v-if="prev.id">
-              {{prev.title}}<i class="iconfont">&#xe69f;</i>
+              <i class="iconfont">&#xe6a0;</i>{{prev.title}}
+            </router-link>
+          </div>
+          <div class="post-nav-next post-nav-item">
+            <router-link :to="getRouteUrl(next.id)" class="status-btn" v-if="next.id">
+              {{next.title}}<i class="iconfont">&#xe69f;</i>
             </router-link>
           </div>
         </div>
@@ -75,10 +74,10 @@ export default {
           fetchArticle(this.articleId, this.query).then(response => {
             scrollTo(0,0)
             setInterval(function(){ AOS.refresh() }, 100);
-            this.$isLoading(false)
             this.article = response.data.article
             this.next = response.data.next
             this.prev = response.data.prev
+            this.$isLoading(false)
           }).catch(function() {
             vm.$isLoading(false)
           })

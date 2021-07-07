@@ -78,7 +78,7 @@ h1.post-title {
             }
         }
     }
-    .post-nav-prev {
+    .post-nav-next {
         text-align: right;
     }
 }
@@ -100,13 +100,13 @@ h1.post-title {
             top: 150px;
             overflow: initial
         }
-        .prev {
+        .next {
             left: -70px !important;
             .arrow {
                 margin-left: 80px
             }
         }
-        .next {
+        .prev {
             right: -70px !important;
             .arrow {
                 margin-right: 80px
