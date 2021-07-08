@@ -8,6 +8,7 @@ import "@/style/index.scss"
 import AlertIns from "./utils/alert"
 import Highlight from './utils/highlight'
 import loading from 'vuejs-loading-screen'
+import '@/permission' // permission control
 
 Vue.prototype.$Alert = AlertIns;
 Vue.use(Highlight);

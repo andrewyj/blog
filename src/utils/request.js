@@ -1,5 +1,6 @@
 import axios from 'axios'
 import AlertIns from "./alert";
+import { getToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -8,12 +9,15 @@ const service = axios.create({
 })
 
 // request interceptor
-// service.interceptors.request.use(
-//   error => {
-//     console.log(error.message)
-//     return Promise.reject(error)
-//   }
-// )
+service.interceptors.request.use(
+  config => {
+    config.headers['X-Token'] = getToken()
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
 
 // response interceptor
 service.interceptors.response.use(
