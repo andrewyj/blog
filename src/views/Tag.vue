@@ -4,7 +4,7 @@
     <div class="posts-list">
       <div class="post">
         <div class="tags">
-          <router-link :style="getTagStyle(item.count)" :to="'/?tag_id='+item.id" class="tag" 
+          <router-link :style="getTagStyle(item.count)" :to="'/?tag_id='+item.id" class="tag" style="border:none"
           v-for="item in tags" 
           v-bind:key="item.id">{{item.name}}</router-link>
         </div>
