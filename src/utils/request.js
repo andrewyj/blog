@@ -11,7 +11,10 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    config.headers['X-Token'] = getToken()
+    if (getToken()) {
+      config.headers['X-Token'] = getToken()
+    }
+    
     return config
   },
   error => {
