@@ -13,32 +13,38 @@ const routes = [
   {
     path: '/',
     name: 'List',
-    component: List
+    component: List,
+    meta: { title: 'Index'}
   },
   {
     path: '/article/:id(\\d+)',
     name: 'Article',
-    component: Article
+    component: Article,
+    meta: { title: 'Article'}
   },
   {
     path: '/archives',
     name: 'Archive',
-    component: Archive
+    component: Archive,
+    meta: { title: 'Archive'}
   },
   {
     path: '/comments',
     name: 'PublicComment',
-    component: PublicComment
+    component: PublicComment,
+    meta: { title: 'Comment'}
   },
   {
     path: '/tags',
     name: 'Tag',
-    component: Tag
+    component: Tag,
+    meta: { title: 'Tag'}
   },
   {
     path: '/photos/:id?',
     name: 'Photo',
-    component: Photo
+    component: Photo,
+    meta: { title: 'Photo'}
   }
 ]
 

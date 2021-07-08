@@ -6,24 +6,26 @@
           <img
             class="custom-logo avatar"
             style="width: 75px; height: 75px"
-            src="//cdn.v2ex.com/gravatar/e6d0ff614921f717bd85da18604fa2aes=60&d=identicon&r=G"
+            :src="settings.portrait"
           />
         </figure>
       </a>
       <div class="blog-description">
-        hahahh
-        <!--                <div class="typed-strings" hidden>-->
-        <!--                </div>-->
-        <!--                <span class="typed"></span>-->
+        {{settings.introduction}}
       </div>
     </div>
-    <!-- .site-branding -->
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: "Introduction",
+  computed: {
+    ...mapGetters([
+      'settings'
+    ])
+  }
 };
 </script>
 

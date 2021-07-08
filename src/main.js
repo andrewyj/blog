@@ -19,11 +19,29 @@ Vue.use(loading, {
   icon_color: '#000',
 })
 
-new Vue({
-  router,
-  store,
-  render: h => h(App),
-  created() {
-    AOS.init()
-  },
-}).$mount('#app')
+try {
+  store.dispatch('settings/getOptions', function(state) {
+
+    // 更换 icon
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link')
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = state.icon;
+    document.getElementsByTagName('head')[0].appendChild(link)
+
+    // 启动 vue
+    new Vue({
+      router,
+      store,
+      render: h => h(App),
+      created() {
+        AOS.init()
+      },
+    }).$mount('#app')    
+  })
+} catch (error) {
+  AlertIns.message({
+    content: error || 'Has Error',
+    duration: 3
+  });
+}

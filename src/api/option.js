@@ -1,13 +1,8 @@
 import request from '@/utils/request'
 
-export function getOptions(group) {
-  let url = '/options'
-  if (group) {
-    url += '?group='+ group
-  }
-  
+export function getOptions() {
   return request({
-    url: url,
+    url: '/options',
     method: 'get',
   })
 }

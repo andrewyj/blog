@@ -67,7 +67,7 @@ export default {
   watch: { 
     '$route': {
         handler() {
-            this.init()
+          this.init()
         },
         deep: true,
         immediate: true,

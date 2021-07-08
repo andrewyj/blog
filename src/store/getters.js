@@ -1,8 +1,5 @@
 const getters = {
-  comment: state => state.settings.comment,
-  article: state => state.settings.article,
-  photo: state => state.settings.photo,
-  common: state => state.settings.common,
+  settings: state => state.settings
 }
 
 export default getters

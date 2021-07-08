@@ -20,7 +20,7 @@ export default {
     "bl-search": Search,
     "bl-introduction": Introduction,
     "bl-footer": Footer,
-  },
+  }
 };
 </script>
 
