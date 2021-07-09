@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getOptions() {
   return request({
-    url: '/options',
+    url: '/v1/options',
     method: 'get',
   })
 }

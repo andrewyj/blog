@@ -60,8 +60,16 @@ const routes = [
   {
     path: '/404',
     name: '404',
-    component: () => import('@/views/404'),
-    meta: { title: '404'}
+    component: () => import('@/views/Error'),
+    meta: { title: '404'},
+    props: { message: 'The page you are looking for is not found.' }
+  },
+  {
+    path: '/500',
+    name: '500',
+    component: () => import('@/views/Error'),
+    meta: { title: '500'},
+    props: { message: 'Something went wrong please try again.' }
   },
   { path: '*', redirect: '/404'}
 ]

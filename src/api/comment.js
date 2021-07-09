@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 export function fetchComments(articleId) {
-  let url = '/comments'
+  let url = '/v1/comments'
   if (articleId) {
     url += '?article_id='+articleId
   }
@@ -12,7 +12,7 @@ export function fetchComments(articleId) {
 }
 export function createComment(data) {
   return request({
-    url: '/comment',
+    url: '/v1/comment',
     method: 'post',
     data
   })

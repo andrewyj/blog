@@ -2,9 +2,9 @@
   <div class="wscn-http404-container">
     <div class="wscn-http404">
       <div class="bullshit">
-        <div class="bullshit__oops">404 | Not Found</div>
+        <div class="bullshit__oops">Oops</div>
         <!-- <div class="bullshit__headline"></div> -->
-        <div class="bullshit__info">The page you are looking for is not found.</div>
+        <div class="bullshit__info">{{message}}</div>
         <a href="" class="bullshit__return-home">Back to home</a>
       </div>
     </div>
@@ -14,12 +14,13 @@
 <script>
 
 export default {
-  name: 'Page404',
-  computed: {
-    message() {
-      return 'The webmaster said that you can not enter this page...'
+  name: 'Error',
+  props: {
+    message: {
+      type: String,
+      required: true
     }
-  }
+  },
 }
 </script>
 

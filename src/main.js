@@ -37,7 +37,7 @@ try {
       created() {
         AOS.init()
       },
-    }).$mount('#app')    
+    }).$mount('#app')
   })
 } catch (error) {
   AlertIns.message({

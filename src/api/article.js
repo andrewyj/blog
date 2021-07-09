@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/articles',
+    url: '/v1/articles',
     method: 'get',
     params: query
   })
@@ -10,7 +10,7 @@ export function fetchList(query) {
 
 export function fetchArticle(id, query) {
   return request({
-    url: '/article/'+id,
+    url: '/v1/article/'+id,
     method: 'get',
     params: query
   })
@@ -18,7 +18,7 @@ export function fetchArticle(id, query) {
 
 export function fetchArchives() {
   return request({
-    url: '/archives',
+    url: '/v1/archives',
     method: 'get'
   })
 }

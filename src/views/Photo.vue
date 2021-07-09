@@ -50,8 +50,8 @@
             <div class="pswp__share-tooltip"></div>
           </div>
 
-          <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-          <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+          <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)" @click="accessPhoto"></button>
+          <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)" @click="accessPhoto"></button>
 
           <div class="pswp__caption">
             <div class="pswp__caption__center"></div>
@@ -70,7 +70,7 @@ import PhotoSwipeUI_Default from "photoswipe/dist/photoswipe-ui-default";
 import "photoswipe/dist/photoswipe.css";
 import "photoswipe/dist/default-skin/default-skin.css";
 import loadMore from "@/components/loadMore"
-import { fetchPhotos } from '@/api/photo'
+import { fetchPhotos, photoAccessLog} from '@/api/photo'
 import { fetchPhotoTag } from '@/api/tag'
 
 function doubleRaf (callback) {
@@ -97,6 +97,7 @@ export default {
       },
       totalPage: 0,
       photosElem: null,
+      gallery: null
     };
   },
   mounted() {
@@ -119,19 +120,16 @@ export default {
     enterGallery(index) {
       let pswpElement = document.querySelectorAll(".pswp")[0];
       let options = { showAnimationDuration: 0, hideAnimationDuration: 0};
-      let gallery = new PhotoSwipe(
+      this.gallery = new PhotoSwipe(
         pswpElement,
         PhotoSwipeUI_Default,
         this.items,
         options
       )
-      gallery.init()
-      gallery.goTo(index)
-      gallery.ui.getFullscreenAPI().enter()
-    },
-    nextPage(page) {
-      this.query.page = page
-      this.getPhotos()
+      this.gallery.init()
+      this.gallery.goTo(index)
+      this.gallery.ui.getFullscreenAPI().enter()
+      this.accessPhoto()
     },
     init() {
       this.title = '图片墙'
@@ -181,6 +179,11 @@ export default {
         vm.isLoading = false
       })
     },
+    accessPhoto() {
+      if (this.gallery.currItem.id) {
+        photoAccessLog(this.gallery.currItem.id)
+      }
+    },
     tidyPhoto(photo) {
       let title = '<h2>'+photo.title+'</h2>'+'<p>'+photo.describe+'</p><br/>'
       if (photo.tags) {
@@ -199,6 +202,7 @@ export default {
         w: photo.width,
         h: photo.height,
         title: title,
+        id: photo.id
       }
     }
   }
