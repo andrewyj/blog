@@ -14,14 +14,14 @@
         </div>
         
         <div class="post-nav cf">
-          <div class="post-nav-prev post-nav-item">
-            <router-link :to="getRouteUrl(prev.id)" class="status-btn" v-if="prev.id">
-              <i class="iconfont">&#xe6a0;</i>{{prev.title}}
-            </router-link>
-          </div>
           <div class="post-nav-next post-nav-item">
             <router-link :to="getRouteUrl(next.id)" class="status-btn" v-if="next.id">
-              {{next.title}}<i class="iconfont">&#xe69f;</i>
+              <i class="iconfont">&#xe6a0;</i>{{next.title}}
+            </router-link>
+          </div>
+          <div class="post-nav-prev post-nav-item">
+            <router-link :to="getRouteUrl(prev.id)" class="status-btn" v-if="prev.id">
+              {{prev.title}}<i class="iconfont">&#xe69f;</i>
             </router-link>
           </div>
         </div>
