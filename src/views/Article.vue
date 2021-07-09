@@ -62,6 +62,17 @@ export default {
       }
     }
   },
+  mounted() {
+    const resizeObserver = new ResizeObserver(entries => {
+    for (let entry of entries) {
+        if (entry.target.offsetHeight > 0) {
+          scrollTo(0,0)
+          this.$isLoading(false)
+        }
+      }
+    });
+    resizeObserver.observe(document.querySelector('.markdown-body'));
+  },
   watch: { 
     '$route': {
         handler() {
@@ -72,12 +83,11 @@ export default {
           this.query.tag_id = this.$route.query.tag_id
           this.$isLoading(true)
           fetchArticle(this.articleId, this.query).then(response => {
-            scrollTo(0,0)
-            setInterval(function(){ AOS.refresh() }, 100);
+            setTimeout(function(){ AOS.refresh() }, 100);
             this.article = response.data.article
             this.next = response.data.next
             this.prev = response.data.prev
-            this.$isLoading(false)
+            // this.$isLoading(false)
           }).catch(function() {
             vm.$isLoading(false)
           })

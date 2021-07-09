@@ -103,7 +103,7 @@ export default {
       let vm = this
       fetchList(this.listQuery).then(response => {
         scrollTo(0,0)
-        setInterval(function(){ AOS.refresh() }, 100);
+        setTimeout(function(){ AOS.refresh() }, 100);
         this.$isLoading(false)
         this.list = response.data.list
         this.totalPage = response.data.total_page
