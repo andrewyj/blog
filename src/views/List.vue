@@ -11,7 +11,7 @@
           <div class="status-user">
             <router-link :to="getRouteUrl(item.id)" class="status-btn">{{item.title}}</router-link>
             <p class="section-p">{{item.abstract}}</p>
-            <p class="post-time">{{item.created_at|formatDate}}</p>
+            <p class="post-time">{{item.created_at}}</p>
           </div>
         </div>
       </div>
@@ -36,7 +36,6 @@
 import { fetchList } from '@/api/article'
 import { fetchCategory } from '@/api/category'
 import { fetchArticleTag } from '@/api/tag'
-import { formatTimeToStr } from "@/utils/date";
 import AOS from 'aos'
 
 export default {
@@ -52,16 +51,6 @@ export default {
         tag_id: null,
         keyword: null
       },
-    }
-  },
-  filters: {
-    formatDate: function(time) {
-      if (time != null && time != "") {
-        var date = new Date(time);
-        return formatTimeToStr(date, "yyyy-MM-dd hh:mm:ss");
-      } else {
-        return "";
-      }
     }
   },
   watch: { 

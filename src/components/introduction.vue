@@ -11,7 +11,7 @@
         </figure>
       </a>
       <div class="blog-description">
-        {{settings.introduction}}
+        {{settings.description}}
       </div>
     </div>
   </div>

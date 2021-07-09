@@ -5,11 +5,10 @@
       <article class="post">
         <div class="markdown-body" v-highlight v-html="article.content">
         </div>
-        <div class="center">{{article.created_at|formatDate}}</div>
+        <div class="center">{{article.created_at}}</div>
         <div class="tags center">
           <router-link :to="'/?tag_id='+item.id" class="tag" 
           v-for="item in article.tags"
-          v-bind:todo="item"
           v-bind:key="item.id">{{item.name}}</router-link>
         </div>
         
@@ -35,7 +34,6 @@
 import Comment from "@/components/comment"
 import { fetchArticle } from '@/api/article'
 import AOS from 'aos'
-import { formatTimeToStr } from "@/utils/date";
 
 export default {
   name: "Article",
@@ -51,16 +49,6 @@ export default {
         keyword: ''
       },
     };
-  },
-  filters: {
-    formatDate: function(time) {
-      if (time != null && time != "") {
-        var date = new Date(time);
-        return formatTimeToStr(date, "yyyy-MM-dd hh:mm:ss");
-      } else {
-        return "";
-      }
-    }
   },
   mounted() {
     const resizeObserver = new ResizeObserver(entries => {
@@ -85,9 +73,8 @@ export default {
           fetchArticle(this.articleId, this.query).then(response => {
             setTimeout(function(){ AOS.refresh() }, 100);
             this.article = response.data.article
-            this.next = response.data.next
-            this.prev = response.data.prev
-            // this.$isLoading(false)
+            this.next = response.data.next ? response.data.next : {id:0, title: ''}
+            this.prev = response.data.prev ? response.data.prev : {id:0, title: ''}
           }).catch(function() {
             vm.$isLoading(false)
           })

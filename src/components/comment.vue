@@ -22,7 +22,6 @@
 <script>
 import { fetchComments,createComment } from '@/api/comment'
 import md5 from 'js-md5';
-import { formatTimeToStr } from "@/utils/date";
 import { validURL, validEmail } from '@/utils/validate'
 import AOS from 'aos'
 
@@ -149,14 +148,6 @@ var CommentTree = {
     },
     getGravatar(email){
       return "//cdn.v2ex.com/gravatar/" + md5(email).toString() +"s=60&d=identicon&r=G"
-    },
-    formatDate(time) {
-      if (time != null && time != "") {
-        var date = new Date(time);
-        return formatTimeToStr(date, "yyyy-MM-dd hh:mm:ss");
-      } else {
-        return "";
-      }
     }
   },
   template: 
@@ -169,7 +160,7 @@ var CommentTree = {
             '<div class="commentinfo">{{comment.name}}</div>'+
             '<div class="body"><p>{{comment.content}}</p></div>'+
             '<div class="info">'+
-              '<span><time>{{formatDate(comment.created_at)}}</time></span>'+
+              '<span><time>{{comment.created_at}}</time></span>'+
               '<span><a class="comment-reply-link" v-on:click="setResponsePosition(comment.id)">回复</a></span>'+
             '</div>'+
           '</div>'+
