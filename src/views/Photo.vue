@@ -117,6 +117,10 @@ export default {
       } 
   },
   methods: {
+    nextPage() {
+      this.query.page +=1
+      this.getPhotos()
+    },
     enterGallery(index) {
       let pswpElement = document.querySelectorAll(".pswp")[0];
       let options = { showAnimationDuration: 0, hideAnimationDuration: 0};
