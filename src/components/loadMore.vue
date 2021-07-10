@@ -1,6 +1,6 @@
 <template>
-  <div class="pagination">
-   <div v-if="this.page < this.totalPage">
+  <div class="pagination" v-if="this.page < this.totalPage">
+   <div>
     <i v-if="!isLoading" @click="nextPage()" class="iconfont">&#xe634;</i>
     <div class="loading" v-if="isLoading"><i class="iconfont">&#xe684;</i></div>
    </div>
@@ -37,6 +37,10 @@ export default {
 	text-align: center;
 	width: 300px;
 	margin: 0 auto
+}
+.pagination i {
+	font-size: 40px;
+  cursor: pointer;
 }
 .loading {
     -webkit-animation: loading 1s infinite linear;
@@ -75,10 +79,6 @@ export default {
     to {
         transform: rotate(360deg);
     }
-}
-.pagination i {
-	font-size: 40px;
-  cursor: pointer;
 }
 </style>
 
