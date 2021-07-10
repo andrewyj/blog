@@ -19,7 +19,7 @@
         <a
           title="github"
           class="socialicon"
-          href="https://github.com/SuperHYJ"
+          href="https://github.com/andrewyj"
           target="_blank"
           ><i class="iconfont" aria-hidden="true">&#xe63b;</i></a>
       </li>
