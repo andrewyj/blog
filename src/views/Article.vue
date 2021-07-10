@@ -26,7 +26,7 @@
         </div>
       </article>
     </div>
-    <Comment v-bind:articleId="articleId" />
+    <Comment v-bind:articleId="articleId" :loading="false" />
   </div>
 </template>
 
@@ -51,11 +51,12 @@ export default {
     };
   },
   mounted() {
+    const vm = this
     const resizeObserver = new ResizeObserver(entries => {
     for (let entry of entries) {
-        if (entry.target.offsetHeight > 0) {
+        if (entry.target.offsetHeight > 100) {
+          vm.$isLoading(false)
           scrollTo(0,0)
-          this.$isLoading(false)
         }
       }
     });
@@ -71,10 +72,10 @@ export default {
           this.query.tag_id = this.$route.query.tag_id
           this.$isLoading(true)
           fetchArticle(this.articleId, this.query).then(response => {
-            setTimeout(function(){ AOS.refresh() }, 100);
             this.article = response.data.article
             this.next = response.data.next ? response.data.next : {id:0, title: ''}
             this.prev = response.data.prev ? response.data.prev : {id:0, title: ''}
+            setTimeout(function(){ AOS.refresh(); }, 100);
           }).catch(function() {
             vm.$isLoading(false)
           })

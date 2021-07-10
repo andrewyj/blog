@@ -185,9 +185,17 @@ export default {
   created() {
     this.getComments()
   },
-  props: [
-    'articleId', 
-  ],
+  props: {
+    // 'articleId', 
+    articleId: {
+      // type: Number,
+      required: true
+    },
+    loading: {
+      type: Boolean,
+      default: true
+    },
+  },
   data() {
     return {
       comments: [],
@@ -206,29 +214,32 @@ export default {
   methods: {
     getComments() {
       let vm = this
-      vm.$isLoading(true)
+      vm.setLoading(true)
       fetchComments(this.articleId).then(response => {
-        vm.$isLoading(false)
+        vm.setLoading(false)
         vm.comments = response.data.comments
         vm.commentCount = response.data.count
         setInterval(function(){ AOS.refresh() }, 100);
       }).catch(function() {
-        vm.$isLoading(false)
+        vm.setLoading(false)
       })
     },
     setResponsePosition(position) {
       this.responsePosition = position
     },
     setRespond(respond) {
+      let vm = this
       respond.parent_id = this.responsePosition
       respond.article_id = parseInt(this.articleId)
-      let vm = this
-      vm.$isLoading(true)
+      vm.setLoading(true)
       createComment(respond).then(() => {
         this.getComments()
       }).catch(function() {
-        vm.$isLoading(false)
+        vm.setLoading(false)
       })
+    },
+    setLoading(isLogading) {
+      this.loading && this.$isLoading(isLogading)
     }
   },
 };

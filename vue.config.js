@@ -7,9 +7,9 @@ function resolve(dir) {
 }
 
 module.exports = {
-    publicPath: '/',
+    publicPath: process.env.VUE_APP_STATIC_PATH,
     outputDir: 'dist',
-    assetsDir: 'static',
+    assetsDir: process.env.VUE_APP_ASSETS_DIR,
     lintOnSave: process.env.NODE_ENV === 'development',
     productionSourceMap: false,
     runtimeCompiler: true,

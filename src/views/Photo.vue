@@ -95,7 +95,7 @@ export default {
         tag_id: '',
         keyword: '',
       },
-      totalPage: 0,
+      totalPage: 2,
       photosElem: null,
       gallery: null
     };
@@ -152,7 +152,6 @@ export default {
       let vm = this
       let goto = null
       fetchPhotos(this.query).then(response => {
-        this.isLoading = false
         doubleRaf(()=> {
           for(let index in response.data.list) {
             let photo = response.data.list[index]
@@ -162,11 +161,12 @@ export default {
               goto = this.items.length - 1
             }
           }
-          if (goto != null) {
-            this.enterGallery(goto)
-          }
           vm.$nextTick(function () {
             imagesLoaded(this.photosElem).on('progress', ()=>{
+              if (goto != null) {
+                this.enterGallery(goto)
+              }
+              this.isLoading = false
               this.masonry.reloadItems()
               this.masonry.layout()
             });

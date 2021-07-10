@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       archives: {},
-      totalPage: 0,
+      totalPage: 2,
       isLoading: false,
       query: {
         page:1
@@ -62,7 +62,6 @@ export default {
       this.isLoading = true;
       let vm = this;
       fetchList(this.query).then((response) => {
-          this.isLoading = false;
           this.totalPage = response.data.total_page
           response.data.list.forEach(function (article) {
             var date = new Date(article.created_at);
@@ -73,6 +72,7 @@ export default {
             vm.archives[year].push(article)
           });
           this.$forceUpdate();
+          this.isLoading = false;
         })
         .catch(function () {
           if (this.query.page > 1) {
