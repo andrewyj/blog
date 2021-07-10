@@ -81,7 +81,6 @@ export default {
         return
       }
       this.isLoading = true
-      this.totalPage = this.listQuery.page + 1 //totalPage 大于 page 显示 loading
       this.timeoutId = setTimeout(() => {
         this.getList((list) => {
           this.list = list
@@ -114,6 +113,7 @@ export default {
       })
     },
     resetList(isClose) {
+      this.isLoading = false
       if (this.timeoutId) {
         clearTimeout(this.timeoutId);
       }

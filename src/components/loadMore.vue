@@ -1,5 +1,5 @@
 <template>
-  <div class="pagination" v-if="this.page < this.totalPage">
+  <div class="pagination" v-if="isLoading || this.page < this.totalPage">
    <div>
     <i v-if="!isLoading" @click="nextPage()" class="iconfont">&#xe634;</i>
     <div class="loading" v-if="isLoading"><i class="iconfont">&#xe684;</i></div>

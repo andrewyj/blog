@@ -95,7 +95,7 @@ export default {
         tag_id: '',
         keyword: '',
       },
-      totalPage: 2,
+      totalPage: 0,
       photosElem: null,
       gallery: null
     };
@@ -146,6 +146,9 @@ export default {
       } else if (this.$route.query.keyword) {
         this.title = '"'+this.$route.query.keyword+'"'
       }
+      document.querySelectorAll(".photos")[0].style.height = '0px'
+      this.query.page = 1
+      this.totalPage = 0
       this.query.tag_id = this.$route.query.tag_id
       this.query.keyword = this.$route.query.keyword
       this.items = []

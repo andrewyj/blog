@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       archives: {},
-      totalPage: 2,
+      totalPage: 0,
       isLoading: false,
       query: {
         page:1
