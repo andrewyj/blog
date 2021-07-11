@@ -64,6 +64,7 @@ export default {
       fetchList(this.query).then((response) => {
           this.totalPage = response.data.total_page
           response.data.list.forEach(function (article) {
+            article.created_at = article.created_at.replace(/-/g, "/")
             var date = new Date(article.created_at);
             let year = formatTimeToStr(date, "yyyy-MM")
             if (!vm.archives[year]) {
