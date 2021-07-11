@@ -15,11 +15,14 @@ if (res && res[1]) {
   setToken(token)
 }
 
+const accessToken = Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2)
+
 // request interceptor
 service.interceptors.request.use(
   config => {
     if (token) {
       config.headers['X-Token'] = token
+      config.headers['AccessToken'] = accessToken
     }
     
     return config

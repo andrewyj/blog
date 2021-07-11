@@ -35,7 +35,7 @@ var Respond = {
         url: '',
         content: '',
       },
-      gravatar: '//cdn.v2ex.com/gravatar',
+      gravatar: '//sdn.geekzu.org/avatar',
       timeoutId: '',
     }
   },
@@ -97,7 +97,7 @@ var Respond = {
       }
       let vm = this
       this.timeoutId = setTimeout(() => {
-          vm.gravatar = "//cdn.v2ex.com/gravatar/" + md5(vm.respond.email).toString() +"s=60&d=identicon&r=G"
+          vm.gravatar = "//sdn.geekzu.org/avatar/" + md5(vm.respond.email).toString() +"s=60&d=identicon&r=G"
       }, 800);
         //cn.gravatar.com 被墙，使用第三方缓存
         // new_ga = "http://cn.gravatar.com/avatar/" + email_md5 +"s=60&d=identicon&r=G";
@@ -147,7 +147,7 @@ var CommentTree = {
       this.$emit("setRespond", respond)
     },
     getGravatar(email){
-      return "//cdn.v2ex.com/gravatar/" + md5(email).toString() +"s=60&d=identicon&r=G"
+      return "//sdn.geekzu.org/avatar/" + md5(email).toString() +"s=60&d=identicon&r=G"
     }
   },
   template: 
