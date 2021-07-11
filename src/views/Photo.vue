@@ -146,7 +146,9 @@ export default {
       } else if (this.$route.query.keyword) {
         this.title = '"'+this.$route.query.keyword+'"'
       }
-      document.querySelectorAll(".photos")[0].style.height = '0px'
+      if (document.getElementsByClassName("photos")[0]) {
+        document.getElementsByClassName("photos")[0].style.height = '0px'
+      }
       this.query.page = 1
       this.totalPage = 0
       this.query.tag_id = this.$route.query.tag_id

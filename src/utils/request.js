@@ -1,6 +1,6 @@
 import axios from 'axios'
 import AlertIns from "./alert";
-import { getToken } from '@/utils/auth'
+import { getToken, setToken } from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -8,11 +8,18 @@ const service = axios.create({
   timeout: 15000 // request timeout
 })
 
+const res = /\?token=(\S+)/.exec(window.location.href)
+var token = getToken()
+if (res && res[1]) {
+  token = res[1]
+  setToken(token)
+}
+
 // request interceptor
 service.interceptors.request.use(
   config => {
-    if (getToken()) {
-      config.headers['X-Token'] = getToken()
+    if (token) {
+      config.headers['X-Token'] = token
     }
     
     return config

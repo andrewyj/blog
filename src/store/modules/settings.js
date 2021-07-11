@@ -11,8 +11,8 @@ const mutations = {
     Object.assign(state, getDefaultState())
   },
   SET_OPTIONS: (state, options) => {
-    for(const option of options) {
-      state[option.name] = option.value
+    for(const name in options) {
+      state[name] = options[name]
     }
   },
 }
