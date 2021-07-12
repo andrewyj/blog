@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import List from '../views/List.vue'
 import Article from '../views/Article.vue'
 import Archive from '../views/Archive.vue'
-import PublicComment from '../views/PublicComment.vue'
+import About from '../views/About.vue'
 import Tag from '../views/Tag.vue'
 import Photo from '../views/Photo.vue'
 import Layout from '../views/Layout.vue'
@@ -38,9 +38,9 @@ const routes = [
         meta: { title: 'Archive'}
       },
       {
-        path: '/comments',
-        name: 'PublicComment',
-        component: PublicComment,
+        path: '/about',
+        name: 'About',
+        component: About,
         meta: { title: 'Comment'}
       },
       {

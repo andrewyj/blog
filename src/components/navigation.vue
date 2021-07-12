@@ -95,8 +95,8 @@ export default {
       },
       {
         id: 6,
-        name: "留言",
-        url: "/comments",
+        name: "关于",
+        url: "/about",
       }
     ]
   },

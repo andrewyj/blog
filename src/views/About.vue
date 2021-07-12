@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-        <h1 class="post-title">街坊留言</h1>
+        <h1 class="post-title">关于</h1>
         <div class="post">
           <div class="markdown-body" v-highlight v-html="settings.introduction"></div>
         </div>
