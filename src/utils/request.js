@@ -22,8 +22,8 @@ service.interceptors.request.use(
   config => {
     if (token) {
       config.headers['X-Token'] = token
-      config.headers['AccessToken'] = accessToken
     }
+    config.headers['AccessToken'] = accessToken
     
     return config
   },
