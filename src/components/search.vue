@@ -9,7 +9,7 @@
               :placeholder="getTitle()"
               name="keyword"
               v-model="listQuery.keyword"
-              v-on:keyup="onSearch"
+              v-on:input="onSearch($event)"
             />
             <ul class="search-filtered">
               <li v-for="item in list" v-bind:item="item" v-bind:key="item.id" v-on:click="resetList(true)">
@@ -56,7 +56,7 @@ export default {
     '$route': {
         handler() {
           this.searchArticle = true
-          if (this.$route.path == '/photos') {
+          if (this.$route.path.indexOf('/photos') != -1) {
             this.searchArticle = false
           }
         },

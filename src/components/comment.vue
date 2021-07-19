@@ -115,16 +115,16 @@ var Respond = {
         '<div class="comment-respond">'+
           '<h6 v-if="responsePosition>0"><p class="cancel-comment-reply-link" v-on:click="setResponsePosition(0)">取消</p></h6>'+
           '<div class="author-info">'+
-            '<input v-model="respond.name" type="text" placeholder="名称* : " />'+
-            '<input v-model="respond.email" v-on:keyup="changeGravatar()" v-on:blur="validateEmail()" type="text" placeholder="邮箱* : " />'+
-            '<input v-model="respond.url" v-on:blur="validateUrl()" type="text" placeholder="网址 : " />'+
+            '<input v-model="respond.name" type="text" placeholder="名称*：" />'+
+            '<input v-model="respond.email" v-on:keyup="changeGravatar()" v-on:blur="validateEmail()" type="text" placeholder="邮箱*，用来显示你的gravatar：" />'+
+            '<input v-model="respond.url" v-on:blur="validateUrl()" type="text" placeholder="个人主页：" />'+
           '</div>'+
           '<div class="comment-form-info">'+
             '<div class="real-time-gravatar">'+
               '<img v-bind:src="gravatar"/>'+
             '</div>'+
             '<p>'+
-              '<textarea v-model="respond.content" placeholder="你不说两句吗？(°∀°)ﾉ……"></textarea>'+
+              '<textarea v-model="respond.content" placeholder="说两句？"></textarea>'+
               '<input type="submit" v-on:click="setRespond(respond)" value="发送" />'+
             '</p>'+
           '</div>'+

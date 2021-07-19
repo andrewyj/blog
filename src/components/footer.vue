@@ -24,7 +24,7 @@
           ><i class="iconfont" aria-hidden="true">&#xe63b;</i></a>
       </li>
     </div>
-    <div class="cr">Copyright&copy;2018 - {{getFullYear()}} by huangyingju</div>
+    <div class="cr">Copyright&copy;2018 - {{getFullYear()}} by Andrew</div>
   </footer>
 </template>
 

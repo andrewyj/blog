@@ -5,7 +5,7 @@
       <div class="post">
         <div class="photos">
           <div class="photo-item" v-for="(item, index) in items" v-bind:key="index">
-            <img @click="enterGallery(index)" :src="item.src+'?x-oss-process=image/resize,w_200'"/>
+            <img @click="enterGallery(index)" :ref="'img-'+item.id" :src="item.src+'?x-oss-process=image/resize,w_200'"/>
           </div>
         </div>
       </div>
@@ -132,7 +132,7 @@ export default {
       )
       this.gallery.init()
       this.gallery.goTo(index)
-      this.gallery.ui.getFullscreenAPI().enter()
+      // this.gallery.ui.getFullscreenAPI().enter()
       this.accessPhoto()
     },
     init() {
@@ -159,25 +159,21 @@ export default {
     getPhotos(id) {
       this.isLoading = true
       let vm = this
-      let goto = null
       fetchPhotos(this.query).then(response => {
         doubleRaf(()=> {
           for(let index in response.data.list) {
             let photo = response.data.list[index]
             this.totalPage = response.data.total_page
             this.items.push(this.tidyPhoto(photo))
-            if (id && photo.id == id) {
-              goto = this.items.length - 1
-            }
           }
           vm.$nextTick(function () {
             imagesLoaded(this.photosElem).on('progress', ()=>{
-              if (goto != null) {
-                this.enterGallery(goto)
-              }
-              this.isLoading = false
               this.masonry.reloadItems()
               this.masonry.layout()
+            });
+            imagesLoaded(this.photosElem).on('done', ()=>{
+              this.isLoading = false
+              this.$refs['img-'+id][0].click()
             });
           })
         })
